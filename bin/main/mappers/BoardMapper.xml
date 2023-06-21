@@ -6,6 +6,7 @@
 <!-- MyBatis connection 경로  -->
 <mapper namespace="com.board.mvc.mappers.BoardMapper">
 
+
     <!-- BoardMapper id = "boardCreate" -->
     <insert id="boardCreate">
         INSERT INTO tbl_board (title, content, writer)
@@ -18,15 +19,43 @@
 
 
     <!-- BoardMapper id = "boardList" -->
+    <select id="boardList" parameterType="BoardListDTO" resultType="BoardListDTO">
+        SELECT * FROM tbl_board 
+        WHERE tno > 0
+        ORDER BY tno DESC
+        LIMIT #{skip} , #{size}
+    </select>
 
 
     <!-- BoardMapper id = "boardRead" -->
+    <select id="boardRead" parameterType="int" resultType="BoardDTO">
+        SELECT * FROM tbl_board 
+        WHERE tno = #{tno}
+    </select>
 
 
     <!-- BoardMapper id = "boardDelete" -->
+    <delete id="boardDelete" parameterType="int">
+        DELETE FROM tbl_board 
+        WHERE tno = #{tno}
+    </delete>
 
 
     <!-- BoardMapper id = "boardUpdate" -->
+    <update id="boardUpdate" parameterType="BoardUpdateDTO">
+        UPDATE tbl_board SET 
+        title = #{title}, content = #{content}, writer = #{writer},
+        updateDate = now()
+        WHERE tno = #{tno}
+    </update>
+
+
+    <!-- BoardMapper id = "total" -->
+    <select id="total" resultType="int">
+        SELECT COUNT(*) 
+        FROM ( SELECT tno FROM tbl_board 
+        WHERE tno > 0 LIMIT #{countEnd}) tbl_board
+    </select>
 
 
 </mapper>

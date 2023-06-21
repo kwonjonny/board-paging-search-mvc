@@ -39,4 +39,7 @@ public class BoardController {
         return "/board/update";
     }
 
+    // POST : Read 
+    
+
 }

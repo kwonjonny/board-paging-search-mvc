@@ -1,5 +1,7 @@
 package com.board.mvc.dto.BoardDTO;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,9 +15,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardCreateDTO {
+public class BoardDTO {
     private Integer tno;
     private String title;
     private String content;
     private String writer;
+    private LocalDate registDate;
+    private LocalDate updateDate;
 }

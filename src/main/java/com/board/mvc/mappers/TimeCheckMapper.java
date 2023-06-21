@@ -2,6 +2,7 @@ package com.board.mvc.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
 
+// TimeCheckMapper interface 
 @Mapper
 public interface TimeCheckMapper {
     
