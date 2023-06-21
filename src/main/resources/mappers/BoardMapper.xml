@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MyBatis connection 경로  -->
+<mapper namespace="com.board.mvc.mappers.BoardMapper">
+
+    <!-- BoardMapper id = "boardCreate" -->
+    <insert id="boardCreate">
+        INSERT INTO tbl_board (title, content, writer)
+        VALUES (#{title}, #{content}, #{title})
+        <!-- last insert id 확인 -->
+        <selectKey resultType="int" keyProperty="tno" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
+    <!-- BoardMapper id = "boardList" -->
+
+
+    <!-- BoardMapper id = "boardRead" -->
+
+
+    <!-- BoardMapper id = "boardDelete" -->
+
+
+    <!-- BoardMapper id = "boardUpdate" -->
+
+
+</mapper>
