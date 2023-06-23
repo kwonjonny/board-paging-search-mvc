@@ -10,7 +10,7 @@
     <!-- BoardMapper id = "boardCreate" -->
     <insert id="boardCreate">
         INSERT INTO tbl_board (title, content, writer)
-        VALUES (#{title}, #{content}, #{title})
+        VALUES (#{title}, #{content}, #{writer})
         <!-- last insert id 확인 -->
         <selectKey resultType="int" keyProperty="tno" order="AFTER">
             SELECT LAST_INSERT_ID()
@@ -22,6 +22,23 @@
     <select id="boardList" parameterType="BoardListDTO" resultType="BoardListDTO">
         SELECT * FROM tbl_board 
         WHERE tno > 0
+        
+        <if test="searchType != null and keyword != null">
+            AND (
+            <if test="searchType == 'title' or searchType == 'all'">
+                title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'content' or searchType == 'all'">
+                <if test="searchType == 'all'">OR</if>
+                content LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'writer' or searchType == 'all'">
+                <if test="searchType == 'all'">OR</if>
+                writer LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+                )
+        </if>
+
         ORDER BY tno DESC
         LIMIT #{skip} , #{size}
     </select>

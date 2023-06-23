@@ -1,13 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board List Page</title>
 </head>
 <body>
+    <div layout:fragment="content">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Board List Page</h6>
+                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
 
-    <h1>Board List Page</h1>
-    
+                                <!-- searchType start -->
+                                <form action="/board/list" method="get" class="input-group mb-3 searchAction" id="searchForm">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Choose Type</button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" data-searchtype="writer">Writer</a>
+                                            <a class="dropdown-item" href="#" data-searchtype="title">Title</a>
+                                            <a class="dropdown-item" href="#" data-searchtype="content">Content</a>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="searchType" id="searchType">
+                                    <input type="text" class="form-control" name="keyword" aria-label="Text input with segmented dropdown button">
+                                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                                </form>
+                                <!-- searchType end -->
+
+                                <!-- table start -->
+                                <table class="table table-bordered boardTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tno</th>
+                                            <th>Title</th>
+                                            <th>Writer</th>
+                                            <th>ReigstDate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="board :${boardListDTO.list}">
+                                        <td class="boardRead" th:data-tno="${board.tno}">[[${board.tno}]]</td>
+                                        <td>[[${board.title}]]</td>
+                                        <td>[[${board.writer}]]</td>
+                                        <td>[[${board.registDate}]]</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- taable end -->
+
+                                <!-- 페이징 START-->
+                                </div>
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination boardUl">
+                                    <li class="page-item"><a class="page-link" href="10">&laquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="11">11</a></li>
+                                    <li class="page-item"><a class="page-link" href="12">12</a></li>
+                                    <li class="page-item"><a class="page-link" href="13">13</a></li>
+                                    <li class="page-item"><a class="page-link" href="21">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <!-- 페이징 END -->
+
+                                <form class ="actionForm" action = "/board/list" method = "get">
+                                    <input type="hidden" name="page" th:value = "${pageRequestDTO.page}">
+                                    <!-- 어느 페이지를 가든 size는 유지  -->
+                                    <input type="hidden" name="size" th:value = "${pageRequestDTO.size}">
+                                    <!-- keyword -->
+                                    <!-- SearchType 1페이지로 가야 함 -->
+                                    <button type="button" class="btn btn-primary createButton">게시글 글쓰기</button>
+                                </form>
+
+                        </div>
+                    </div>
+                </div>
+
+    <script layout:fragment ="script" th:inline = "javascript">
+        
+        // actionFrom 등록 
+        const actionForm = document.querySelector(".actionForm")
+
+        // boardRead 등록 
+        const actionRead = document.querySelector(".boardRead")
+
+
+        // boardRead eventListner 등록 
+        // click 이벤트가 발생시 /board/read/tno 로 get 요청 
+        actionRead.addEventListener("click", (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+
+            const target = e.target
+
+            if(!target.getAttribute("data-tno")) {
+                return
+            }
+
+            const tno = target.getAttribute("data-tno")
+
+            actionForm.setAttribute("action", `/board/read/${tno}`)
+            actionForm.submit()
+        },false)
+
+        // createButton eventListner 등록 
+        // click 이벤트가 발생시 /board/create 로 get 요청 
+        const actionCreate = document.querySelector(".createButton")
+        actionCreate.addEventListener("click", (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+
+            actionForm.setAttribute("action", `/board/create`)
+            actionForm.setAttribute("method", `get`)
+            actionForm.submit();
+        },false)
+
+
+        // 검색 eventListner 등록 
+        // click 이벤트가 발생시 /board/list 로 get 요청 
+        // 검색 결과 list 형식으로 보여줌 
+        const dropdwonItem = document.querySelectorAll(".dropdown-menu a")
+        dropdwonItem.forEach(item => {
+            item.addEventListener("click", (e) => {
+                
+            e.preventDefault()
+            e.stopPropagation()
+
+            const searchType = e.target.getAttribute("data-searchtype")
+            document.getElementById("searchType").value = searchType
+        },false)
+    },false)
+
+    </script>
 </body>
 </html>

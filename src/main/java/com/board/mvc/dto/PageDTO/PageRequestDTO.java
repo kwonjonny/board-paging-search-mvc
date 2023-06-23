@@ -21,10 +21,14 @@ public class PageRequestDTO {
     @Builder.Default
     private int size = 10;
 
+    // 검색 조건 
+    private String searchType;  // 검색 타입
+    private String keyword;    // 검색 키워드
+
     // if page 요청이 0 보다 작으면 강제 1 page
     public void setPage(int page) {
         if(page <= 0) {
-            this.page = page;
+            this.page = 1;
         } else {
             this.page = page;
         }
@@ -32,7 +36,7 @@ public class PageRequestDTO {
 
     // if size 요청이 0보다 작고 100 보다 크면 강제 10
     public void setSize(int size) {
-        if(size <= 100 || size >= 0 ) {
+        if(size <= 0 || size > 100) {
             this.size = 10;
         } else {
             this.size = size;

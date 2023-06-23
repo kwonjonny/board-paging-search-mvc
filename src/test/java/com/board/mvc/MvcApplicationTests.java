@@ -24,7 +24,7 @@ class MvcApplicationTests {
 		try (Connection connection = dataSource.getConnection()){
 			log.info("is ready database connection");
 		} catch (Exception e) {
-			log.info("not ready database connection");
+			log.info("we cant search database connection");
 			e.printStackTrace();
 		}
 	}

@@ -1,8 +1,10 @@
 package com.board.mvc.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +40,7 @@ public class BoardServiceTests {
     private BoardUpdateDTO boardUpdateDTO;
 
     // BoardService Create Test Set Up 
+    // BoardService Update Test Set Up 
     @BeforeEach
     public void setUp() {
         boardCreateDTO = BoardCreateDTO.builder()
@@ -45,11 +48,7 @@ public class BoardServiceTests {
         .writer(TEST_WRITER)
         .content(TEST_CONTENT)
         .build();
-    }
 
-    // BoardServce Update Test Set Up 
-    @BeforeEach
-    public void setUpdate() {
         boardUpdateDTO = BoardUpdateDTO.builder()
         .tno(TEST_TNO)
         .title(TEST_TITLE)
@@ -79,18 +78,24 @@ public class BoardServiceTests {
         log.info("========== End Board Service Read ==========");
     }
 
-    // BoardService List Test 
     @Test
-    @Transactional
-    @DisplayName("게시판 리스트 테스트 서비스")
-    public void listBoardServiceTest() {
-        log.info("========== Start Board List Test ==========");
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
-        PageResponseDTO<BoardListDTO> boardList = boardService.boardList(pageRequestDTO);
-        log.info(boardList);
-        assertNotNull(boardList, "List should not be null");
-        log.info("========== End Board List Test ==========");
+    public void testBoardListSearch() {
+        log.info("========== Start Board Service list =========");
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+            .searchType("title")
+            .keyword("권성준님1234")
+            .build();
+        PageResponseDTO<BoardListDTO> response = boardService.boardList(pageRequestDTO); 
+
+        // list 로그 
+        log.info(response);
+        // 가져온 게시물들이 검색 조건에 부합하는지 확인
+        for (BoardListDTO board : response.getList()) {
+        assertTrue(board.getTitle().contains("권성준님1234"), "Title should contain '권성준님1234'");
+        }
+        log.info("========== End Board Service List ==========");
     }
+
 
     // BoardService Delete Test 
     @Test

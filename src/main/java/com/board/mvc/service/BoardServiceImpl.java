@@ -20,6 +20,7 @@ public class BoardServiceImpl implements BoardService {
     // 의존성 주입 
     private final BoardMapper boardMapper;
 
+    // Autowried 의존성 주입 명시 
     @Autowired
     public BoardServiceImpl(BoardMapper boardMapper) {
         this.boardMapper = boardMapper;
@@ -43,10 +44,17 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public PageResponseDTO<BoardListDTO> boardList(PageRequestDTO pageRequestDTO) {
-        List<BoardListDTO> List = boardMapper.boardList(pageRequestDTO);
+
+        // 검색 조건 설정 
+        String searchType = pageRequestDTO.getSearchType();
+        String keyword = pageRequestDTO.getKeyword();
+
+        List<BoardListDTO> list = boardMapper.boardList(pageRequestDTO);
         Integer total = boardMapper.total(pageRequestDTO);
+
+
         return PageResponseDTO.<BoardListDTO>withAll()
-                .list(List)
+                .list(list)
                 .total(total)
                 .build();
     }
