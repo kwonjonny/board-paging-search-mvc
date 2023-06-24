@@ -80,7 +80,7 @@ public class BoardController {
     public String postUpdate(BoardUpdateDTO boardUpdateDTO, RedirectAttributes redirectAttributes) {
         boardService.boardUpdate(boardUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "수정 작업이 완료되었습니다.");
-        return "redriect:/board/read" + boardUpdateDTO.getTno();
+        return "redirect:/board/read/" + boardUpdateDTO.getTno();
     }
 
     // POST : Delete 

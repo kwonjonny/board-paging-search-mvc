@@ -28,7 +28,7 @@ public class BoardMapperTests {
     private static final String TEST_TITLE = "TestTitleMapper";
     private static final String TEST_WRITER = "TestWriterMapper";
     private static final String TEST_CONTENT = "TestContentMapper";
-    private static final Integer TEST_TNO = 34209267;
+    private static final Integer TEST_TNO = 1;
 
     // BeforeEach 사용을 위한 BoardCreateDTO, BoardUpdateDTO 정의 
     private BoardCreateDTO boardCreateDTO;

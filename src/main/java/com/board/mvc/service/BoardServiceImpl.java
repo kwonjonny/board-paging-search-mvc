@@ -36,8 +36,8 @@ public class BoardServiceImpl implements BoardService {
     // Board read ServiceImpl
     @Override
     @Transactional
-    public BoardDTO boardRead(Integer pno) {
-        return boardMapper.boardRead(pno);
+    public BoardDTO boardRead(Integer tno) {
+        return boardMapper.boardRead(tno);
     }
 
     // Board List ServiceImpl
@@ -62,8 +62,8 @@ public class BoardServiceImpl implements BoardService {
     // Board Delete ServiceImpl
     @Override
     @Transactional
-    public void boardDelete(Integer pno) {
-        boardMapper.boardDelete(pno);;
+    public void boardDelete(Integer tno) {
+        boardMapper.boardDelete(tno);
     }
 
     // Board Update ServiceImpl

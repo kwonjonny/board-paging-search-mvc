@@ -8,8 +8,92 @@
     <title>Board Create Page</title>
 </head>
 <body>
-    <div layout:fragment="content">
+   <!-- fragment content start -->
+ <div layout:fragment="content">
     <h1>Board Create Page</h1>
-    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+
+              <!-- 등록 페이지 -->
+              <!-- form start -->
+              <form class="form-horizontal actionButton" name="valueCheck" method="post">
+                <div class="card-body">
+                  <h4 class="card-title">등록 페이지</h4>
+                  <div class="form-group row">
+                    <label for="fname" class="col-sm-3 text-end control-label col-form-label"></label>
+                  </div>
+
+                  <!-- title start -->
+                  <div class="form-group row">
+                    <label for="title" class="col-sm-3 text-end control-label col-form-label">Title</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="title" name="title" th:required = "required"/>
+                    </div>
+                  </div>
+                  <!-- title end -->
+
+                  <!-- writer start -->
+                  <div class="form-group row">
+                    <label for="writer" class="col-sm-3 text-end control-label col-form-label">Writer</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="writer" name="writer" th:required = "required"/>
+                    </div>
+                  </div>
+                 <!-- writer end -->
+
+                  <!-- content start -->
+                  <div class="form-group row">
+                    <label for="content" class="col-sm-3 text-end control-label col-form-label">Content</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" name="content" th:required = "required"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <!-- content end -->
+
+                <!-- button start -->
+                <div class="border-top">
+                  <div class="card-body">
+                    <button type="button" class="btn btn-primary createButton">
+                      게시글 등록
+                    </button>
+                  </div>
+                </div>
+                <!-- button end -->
+
+              </form>
+              <!-- form end -->
+
+            </div>
+          </div>
+        </div>
+     </div>
+     <!-- fragment content end -->
+
+     <!-- javaScript start -->
+     <script layout:fragmnet="script" th:inline="javaScript">
+        
+        // actionForm 등록 
+        const actionForm = document.querySelector(".actionButton")
+        
+        // createButton 등록 
+        const actionCreate = document.querySelector(".createButton");
+
+        // createButton eventlistner 등록 
+        // click 이벤트가 발생시 /board/create 로 post 요청 submit 
+        actionCreate.addEventListener("click" , (e) => {
+          actionForm.setAttribute("action", `/board/create`)
+          actionForm.setAttribute("method",`post`)
+          actionForm.submit();
+        })
+
+     </script>
+     <!-- javaScript end -->
+
 </body>
 </html>

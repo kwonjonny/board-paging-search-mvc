@@ -17,6 +17,26 @@
                         <div class="card-body">
                             <div class="table-responsive">
 
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="flashMessageModal" tabindex="-1" aria-labelledby="flashMessageModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="flashMessageModalLabel">Message</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" th:if="${message}" th:text="${message}">
+                                                <!-- Flash message will be inserted here -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+
                                 <!-- searchType start -->
                                 <form action="/board/list" method="get" class="input-group mb-3 searchAction" id="searchForm">
                                     <div class="input-group-prepend">
@@ -52,7 +72,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- taable end -->
+                                <!-- table end -->
 
                                 <!-- 페이징 START-->
                                 </div>
@@ -76,10 +96,14 @@
                                     <!-- SearchType 1페이지로 가야 함 -->
                                     <button type="button" class="btn btn-primary createButton">게시글 글쓰기</button>
                                 </form>
-
+                                <script src = "/js2/pageUtil.js">
+                                </script>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
     <script layout:fragment ="script" th:inline = "javascript">
         
@@ -87,27 +111,46 @@
         const actionForm = document.querySelector(".actionForm")
 
         // boardRead 등록 
-        const actionRead = document.querySelector(".boardRead")
+        const actionRead = document.querySelectorAll(".boardRead")
 
-
-        // boardRead eventListner 등록 
-        // click 이벤트가 발생시 /board/read/tno 로 get 요청 
-        actionRead.addEventListener("click", (e) => {
-            e.preventDefault()
-            e.stopPropagation()
+        const pageObj = actionForm.querySelector("input[name='page']")
+        const boardUl = document.querySelector(".boardUl")
+        boardUl.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
             const target = e.target
+            const pageNum = target.getAttribute("href");
 
-            if(!target.getAttribute("data-tno")) {
-                return
-            }
+            pageObj.value = pageNum
+            actionForm.setAttribute("action" , `/board/list`)
+            actionForm.submit();
 
-            const tno = target.getAttribute("data-tno")
-
-            actionForm.setAttribute("action", `/board/read/${tno}`)
-            actionForm.submit()
         },false)
+        const {page,size} = [[${pageRequestDTO}]]
+        const {total} = [[${boardListDTO}]]
+        const pageList = makePages(page,size,total)
+        boardUl.innerHTML = pageList
 
+
+        // 각 boardRead 요소에 이벤트 리스너 추가
+        actionRead.forEach(actionRead => {
+            actionRead.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const target = e.target;
+
+                if (!target.getAttribute("data-tno")) {
+                    return;
+                }
+
+                const tno = target.getAttribute("data-tno");
+
+                actionForm.setAttribute("action", `/board/read/${tno}`);
+                actionForm.submit();
+            }, false);
+        });
         // createButton eventListner 등록 
         // click 이벤트가 발생시 /board/create 로 get 요청 
         const actionCreate = document.querySelector(".createButton")

@@ -18,13 +18,13 @@ public interface BoardMapper {
     Integer boardCreate(BoardCreateDTO boardCreateDTO);
 
     // Board Read 
-    BoardDTO boardRead(Integer pno);
+    BoardDTO boardRead(Integer tno);
 
     // Board List 
     List<BoardListDTO> boardList(PageRequestDTO pageRequestDTO);
 
     // Board Delete 
-    void boardDelete(Integer pno);
+    void boardDelete(Integer tno);
 
     // Board Update
     Integer boardUpdate(BoardUpdateDTO boardUpdateDTO);

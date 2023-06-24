@@ -1,7 +1,6 @@
 package com.board.mvc.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,7 +32,7 @@ public class BoardServiceTests {
     private static final String TEST_TITLE = "JunitServiceTest";
     private static final String TEST_WRITER = "JunitServiceTest";
     private static final String TEST_CONTENT = "JunitServiceTest";
-    private static final Integer TEST_TNO = 34209267;
+    private static final Integer TEST_TNO = 1;
 
     // BeforeEach 사용을 위한 BoardCreateDTO, BoardUpdateDTO 정의 
     private BoardCreateDTO boardCreateDTO;
@@ -83,7 +82,7 @@ public class BoardServiceTests {
         log.info("========== Start Board Service list =========");
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
             .searchType("title")
-            .keyword("권성준님1234")
+            .keyword("권성준님")
             .build();
         PageResponseDTO<BoardListDTO> response = boardService.boardList(pageRequestDTO); 
 
@@ -91,7 +90,7 @@ public class BoardServiceTests {
         log.info(response);
         // 가져온 게시물들이 검색 조건에 부합하는지 확인
         for (BoardListDTO board : response.getList()) {
-        assertTrue(board.getTitle().contains("권성준님1234"), "Title should contain '권성준님1234'");
+        assertTrue(board.getTitle().contains("권성준님"), "Title should contain '권성준님'");
         }
         log.info("========== End Board Service List ==========");
     }

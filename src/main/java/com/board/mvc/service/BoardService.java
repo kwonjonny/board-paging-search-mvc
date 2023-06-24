@@ -13,13 +13,13 @@ public interface BoardService {
     Integer boardCreate(BoardCreateDTO boardCreateDTO);
 
     // Board Read Service
-    BoardDTO boardRead(Integer pno);
+    BoardDTO boardRead(Integer tno);
 
     // Board List Service
     PageResponseDTO<BoardListDTO> boardList(PageRequestDTO pageRequestDTO);
 
     // Board Delete Service
-    void boardDelete(Integer pno);
+    void boardDelete(Integer tno);
 
     // Board Update Service
     Integer boardUpdate(BoardUpdateDTO boardUpdateDTO);

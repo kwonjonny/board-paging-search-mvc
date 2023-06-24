@@ -2,67 +2,142 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout.html}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board Read Page</title>
 </head>
+
 <body>
-        <div layout:fragment="content">
+    <div layout:fragment="content">
         <h1>Board Read Page</h1>
-            <!-- tno start -->
-            <div class="form-group row">
-                <label for="tno" class="col-sm-3 text-end control-label col-form-label">Tno</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="tno" th:value="${boardDTO.tno}" readonly/>
-                </div>
-            </div>
-            <!-- tno end -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form-horizontal actionForm">
+                                    
+                                    <!-- tno satrt -->
+                                    <div class="form-group row">
+                                        <label for="tno" class="col-sm-3 text-end control-label col-form-label">Tno</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="tno" id="tno" th:value="${boardDTO.tno}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!-- tno end -->
 
-            <!-- title start -->
-            <div class="form-group row">
-                <label for="Title" class="col-sm-3 text-end control-label col-form-label">Title</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="title" th:value="${boardDTO.title}" readonly/>
-                </div>
-            </div>
-            <!-- title end -->
+                                    <!-- title start -->
+                                    <div class="form-group row">
+                                        <label for="Title" class="col-sm-3 text-end control-label col-form-label">Title</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="title" id="title" th:value="${boardDTO.title}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!-- title end -->
 
-            <!-- writer start -->
-            <div class="form-group row">
-                <label for="writer" class="col-sm-3 text-end control-label col-form-label">Writer</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="writer" th:value="${boardDTO.writer}" readonly/>
-                </div>
-            </div>
-            <!-- writer end -->
+                                    <!-- writer start -->
+                                    <div class="form-group row">
+                                        <label for="writer" class="col-sm-3 text-end control-label col-form-label">Writer</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="writer" id="writer" th:value="${boardDTO.writer}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!-- writer end -->
 
-            <!-- registDate start -->
-            <div class="form-group row">
-                <label for="registDate" class="col-sm-3 text-end control-label col-form-label">RegistDate</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="registDate" th:value="${boardDTO.registDate}"readonly/>
-                </div>
-            </div>
-            <!-- registDate end -->
+                                    <!-- registDate start -->
+                                    <div class="form-group row">
+                                        <label for="registDate" class="col-sm-3 text-end control-label col-form-label">RegistDate</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="registDate" id="registDate" th:value="${boardDTO.registDate}"readonly/>
+                                        </div>
+                                    </div>
+                                    <!-- registDate end -->
 
-            <!-- updateDate start -->
-            <div class="form-group row">
-                <label for="modfiyDate" class="col-sm-3 text-end control-label col-form-label">updateDate</label>
-                <div class="col-sm-9">
-                <input type="text" class="form-control" id="modfiyDate" th:value="${boardDTO.updateDate}" readonly/>
-                </div>
-            </div>
-            <!-- updateDate end -->
+                                    <!-- updateDate start -->
+                                    <div class="form-group row">
+                                        <label for="modfiyDate" class="col-sm-3 text-end control-label col-form-label">UpdateDate</label>
+                                        <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="modfiyDate" id="modfyDate" th:value="${boardDTO.updateDate}" readonly/>
+                                        </div>
+                                    </div>
+                                    <!-- updateDate end -->
 
-            <!-- content start -->
-            <div class="form-group row">
-                <label for="content" class="col-sm-3 text-end control-label col-form-label">Content</label>
-                <div class="col-sm-9">
-                <textarea class="form-control" id="content" th:text="${boardDTO.content}" readonly></textarea>
+                                    <!-- content start -->
+                                    <div class="form-group row">
+                                        <label for="content" class="col-sm-3 text-end control-label col-form-label">Content</label>
+                                        <div class="col-sm-9">
+                                        <textarea class="form-control" name="content" id="content" th:text="${boardDTO.content}" readonly></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- content end-->
+
+                                     <!-- 수정, 삭제, 목록 버튼 start -->
+                                    <div class="border-top">
+                                        <div class="card-body">
+                                        <button type="button" class="btn btn-primary updateButton">게시글 수정 page</button>
+
+                                        <button type="button" class="btn btn-primary deleteButton">게시글 삭제 submit</button>
+
+                                        <button type="button" class="btn btn-primary listButton">return list page</button>
+                                        </div>
+                                    </div>
+                                    <!-- 수정, 삭제, 목록 버튼 end -->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- content end-->
-       
+        </div>
+
+        <script layout:fragment ="script" th:inline = "javascript">
+
+            // 폼을 선택하여 actionForm 상수에 할당 
+            const actionForm = document.querySelector(".actionForm")
+            
+            // 게시글 번호 tno 를 가져와 tno 상수에 할당 
+            const tno = [[${boardDTO.tno}]]
+
+
+            // 게시글 리스트 버튼을 선택하여 actionList 상수에 할당 
+            // 게시글 리스트 버튼에 이벤트 리스너 등록 
+            const actionList = document.querySelector(".listButton");
+            actionList.addEventListener("click", (e) => {
+                e.stopPropagation(); // 이벤트 버블링 중지 
+                e.stopPropagation(); // 기본 동작을 중지 
+
+                actionForm.setAttribute("action", `/board/list`)
+                actionForm.setAttribute("method", `get`)
+                actionForm.submit();
+            },false);
+
+            // 게시글 업데이트 버튼을 선택하여 actionUpdate 상수에 할당 
+            // 게시글 업데이트 버튼에 이벤트 리스너 등록 
+            const actionUpdate = document.querySelector(".updateButton");
+            actionUpdate.addEventListener("click", (e) => {
+                e.preventDefault(); // 이벤트 버블링 중지 
+                e.stopPropagation(); // 기본 동작을 중지 
+
+                actionForm.setAttribute("action", `/board/update/${tno}`);
+                actionForm.setAttribute("metho", `get`);
+                actionForm.submit();
+            },false);
+
+            // 게시글 삭제 버튼을 선택하여 actionDelete 상수에 할당 
+            // 게시글 삭제 버튼에 이벤트 리스너 등록 
+            const actionDelete = document.querySelector(".deleteButton");
+            actionDelete.addEventListener("click", (e) => {
+                e.preventDefault(); // 이벤트 버블링 중지
+                e.stopPropagation(); // 기본 동작을 중지 
+
+                actionForm.setAttribute("action", `/board/delete/${tno}`)
+                actionForm.setAttribute("method", `post`)
+                actionForm.submit();
+            },false)
+
+        </script>
 </body>
 </html>
