@@ -78,7 +78,9 @@ public class BoardServiceTests {
     }
 
     @Test
-    public void testBoardListSearch() {
+    @Transactional
+    @DisplayName("게시판 리스트 테스트 서비스")
+    public void listBoardServiceTest() {
         log.info("========== Start Board Service list =========");
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
             .searchType("title")

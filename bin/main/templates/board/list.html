@@ -17,25 +17,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="flashMessageModal" tabindex="-1" aria-labelledby="flashMessageModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="flashMessageModalLabel">Message</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body" th:if="${message}" th:text="${message}">
-                                                <!-- Flash message will be inserted here -->
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal -->
+
 
                                 <!-- searchType start -->
                                 <form action="/board/list" method="get" class="input-group mb-3 searchAction" id="searchForm">
@@ -178,6 +160,8 @@
             document.getElementById("searchType").value = searchType
         },false)
     },false)
+    
+    document.addEventListener("")
 
     </script>
 </body>

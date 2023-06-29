@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardListDTO {
-     private Integer tno;
+    private Integer tno;
     private String title;
     private String content;
     private String writer;
