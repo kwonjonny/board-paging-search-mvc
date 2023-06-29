@@ -1,6 +1,6 @@
 
 
-# 개발 상태 : [개발중]
+# 개발 상태 : [개발완료]
 
 # boardMvc
 - 프로젝트 유형: Board 게시판 만들기 연습 
@@ -17,7 +17,7 @@
 - `io.spring.dependency-management`: Spring의 의존성 관리 기능을 추가합니다. 버전은 1.1.0입니다.
 
 ### 프로젝트 정보
-- `group`: 프로젝트 그룹 ID를 'my'로 설정합니다.
+- `group`: 프로젝트 그룹 ID를 'com.board'로 설정합니다.
 - `version`: 프로젝트 버전을 '0.0.1-SNAPSHOT'으로 설정합니다.
 - `sourceCompatibility`: 프로젝트 Java 버전을 17로 설정합니다.
 
@@ -43,6 +43,7 @@
 ### 주요 기능
 - Board 항목 생성, 조회, 수정, 삭제
 - 페이지네이션 지원
+- Board 항목 title, content, writer 검색 지원 
 - Board 항목 필터링 및 정렬 기능
 - Bootstrap을 이용한 반응형 웹 디자인
 
@@ -58,10 +59,10 @@
 
 ### 빌드 및 실행 방법
 1. 이 저장소를 복제하거나 다운로드합니다: `git clone [repository_url]`
-2. 프로젝트 디렉토리로 이동합니다: `cd MyToyMvc`
+2. 프로젝트 디렉토리로 이동합니다: `cd boardMvc`
 3. 프로젝트를 빌드합니다: `./gradlew build`
 4. 애플리케이션을 실행합니다: `./gradlew bootRun`
-5. 웹 브라우저에서 애플리케이션에 접속합니다: `http://localhost:8084/board/list`
+5. 웹 브라우저에서 애플리케이션에 접속합니다: `http://localhost:8085/board/list`
 
 ## 부트스트랩 사용
 이 프로젝트는 부트스트랩 템플릿을 사용하여 사용자 인터페이스를 구성합니다. 템플릿에 대한 자세한 정보는 [AdminSB](https://startbootstrap.com/theme/sb-admin-2)를 참조하세요.
