@@ -3,7 +3,7 @@
 # 개발 상태 : [개발완료]
 
 # boardMvc
-- 프로젝트 유형: Board 게시판 만들기 연습 
+- 프로젝트 유형: Board 게시판 만들기 토이프로젝트 
 - 목표: JavaScript, Thymeleaf, Spring Boot 를 활용하여 페이지네이션, 검색 기능이 포함된 Board 애플리케이션 개발
 - 목표: 개발의 순서 정립 DataBase 설계 
 - 목표: 개발의 순서 정립 MapperInterface 개발 => Mapper.xml 개발 => MapperTestCode 작성 => ServiceInterface 개발 => ServiceImpl 개발 => ServiceTestCode 작성
